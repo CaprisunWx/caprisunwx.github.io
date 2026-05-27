@@ -10,7 +10,7 @@
 */
 
 // global values, variables, and other nonsense that needs a home
-let DBLastId;
+let DBLastId; //the number of individual ID's in the database
 const form = document.getElementById("form");
 
 import * as db from "./databaseHandler.js"; //imports everything from the file, that we specify should be exported
@@ -70,6 +70,38 @@ function lsSize() {
     document.getElementById("size1").innerHTML = "Localstorage space used: " + (total / 1024).toFixed(2) + ' KB';
 
 }
+
+//function to calculate the storage size of indexedDB
+async function estimateStoreSize(dbName, storeName) {
+    const db = await openDatabase(dbName);
+    const transaction = db.transaction(storeName, 'readonly');
+    const store = transaction.objectStore(storeName);
+    const getAllRequest = store.getAll(); // Fetch all entries
+   
+    return new Promise((resolve, reject) => {
+      getAllRequest.onsuccess = () => {
+        const entries = getAllRequest.result;
+        let totalSize = 0;
+   
+        entries.forEach(entry => {
+          // Serialize to JSON and calculate byte length
+          const jsonString = JSON.stringify(entry);
+          const entrySize = new Blob([jsonString]).size; // Bytes
+          totalSize += entrySize;
+        });
+   
+        resolve(totalSize); // Total size in bytes
+      };
+   
+      getAllRequest.onerror = () => reject(getAllRequest.error);
+      transaction.oncomplete = () => db.close();
+    });
+  }
+  /*
+  estimateStoreSize('myAppDB', 'notes').then(bytes => 
+    console.log(`Estimated store size: ${(bytes / (1024 * 1024)).toFixed(2)} MB`)
+  );
+  */
 
 document.getElementById("clear").addEventListener("click", clear);
 //clear localstorage/cookies
