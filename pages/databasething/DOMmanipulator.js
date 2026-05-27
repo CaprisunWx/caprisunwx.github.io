@@ -2,12 +2,20 @@
 
     this file is meant for interacting with the page, and handing off data to the database handler
 
+    NOTES*
+        - since we are using IndexedDb, it SHOULD be supported on all modern browsers (unless the user is using some albanian knock-off)
+        - 
+
 
 */
 
 // global values, variables, and other nonsense that needs a home
 let DBLastId;
 const form = document.getElementById("form");
+
+import * as db from "./databaseHandler.js"; //imports everything from the file, that we specify should be exported
+
+
 
 ////listeners
 //things that should be done at startup
@@ -32,6 +40,7 @@ function userSubmit() {
     localStorage.setItem("Notes", notes);
     console.log(date);
     console.log(notes);
+    lsSize();
 }
 
 
@@ -45,8 +54,9 @@ function inputDatabase() {
 
 
 
+
 ////debug/other stuff
-//localstorage size
+//localstorage size (just for seeing how big everything takes up on the user's storage device)
 function lsSize() {
     //one version
     let total = 0;
@@ -57,7 +67,7 @@ function lsSize() {
         }
     }
     // Convert to Kilobytes
-    document.getElementById("size1").innerHTML = (total / 1024).toFixed(2) + ' KB';
+    document.getElementById("size1").innerHTML = "Localstorage space used: " + (total / 1024).toFixed(2) + ' KB';
 
 }
 
