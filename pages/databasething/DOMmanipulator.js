@@ -38,8 +38,8 @@ function userSubmit() {
     //saving to local storage (TESTING PURPOSES)
     localStorage.setItem("dateSaved", date);
     localStorage.setItem("Notes", notes);
-    console.log(date);
-    console.log(notes);
+    log(date);
+    log(notes);
     lsSize();
 }
 
@@ -53,12 +53,9 @@ function inputDatabase() {
 
 
 
-
-
-////debug/other stuff
+////ANYTHING AFTER THIS IS JUST DEBUG
 //localstorage size (just for seeing how big everything takes up on the user's storage device)
 function lsSize() {
-    //one version
     let total = 0;
     for (let key in localStorage) {
         if (localStorage.hasOwnProperty(key)) {
@@ -109,4 +106,16 @@ function clear() {
     console.log("cleared");
     localStorage.clear();
     lsSize();
+}
+
+
+//gonna make a function to save logs to some place, probably jst to indexedDB, gonna use localstorage for now since its much simpler to do
+
+localStorage.setItem("log","");
+
+function log(string) {
+  console.log(string);
+  let pastLog = localStorage.getItem("log");
+  localStorage.setItem("log", pastLog + " " + string);
+  
 }

@@ -21,6 +21,9 @@ request.onsuccess = function() {
     let db = request.result
 }
 
+
+
+
 ////database functions
 //creating the database
 function createDB() {
