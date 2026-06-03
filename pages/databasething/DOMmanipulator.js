@@ -13,6 +13,9 @@
 let DBLastId; //the number of individual ID's in the database
 const form = document.getElementById("form");
 
+let dbName = "main";
+let objectStoreName = "store";
+
 import * as db from "./databaseHandler.js"; //imports everything from the file, that we specify should be exported
 
 
@@ -21,6 +24,18 @@ import * as db from "./databaseHandler.js"; //imports everything from the file, 
 //things that should be done at startup
 document.addEventListener("DOMContentLoaded", function() {
     lsSize();
+
+    //testung out our database functions
+  let data = {
+    "id":1,
+    "name": "yonald"
+  }
+  db.storeToDB(dbName, objectStoreName, data);
+  let data2 = {
+    "id":4,
+    "name": "hotdog"
+  }
+  db.storeToDB(dbName, objectStoreName, data2);
 })
 
 //when the user submits the input form
@@ -121,3 +136,6 @@ function log(string) {
   localStorage.setItem("log", pastLog + " " + string);
   
 }
+
+
+
