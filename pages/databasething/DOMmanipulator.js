@@ -66,6 +66,7 @@ function lsSize() {
     // Convert to Kilobytes
     document.getElementById("size1").innerHTML = "Localstorage space used: " + (total / 1024).toFixed(2) + ' KB';
 
+
 }
 
 //function to calculate the storage size of indexedDB
@@ -86,7 +87,8 @@ async function estimateStoreSize(dbName, storeName) {
           const entrySize = new Blob([jsonString]).size; // Bytes
           totalSize += entrySize;
         });
-   
+        
+        document.getElementById("size2").innerHTML = "IndexedDB size: " + totalSize;
         resolve(totalSize); // Total size in bytes
       };
    
