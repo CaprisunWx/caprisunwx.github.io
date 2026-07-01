@@ -59,6 +59,12 @@ export function storeToDB(dbName, objectStore, data) {
     }
 }
 
+// read from the database, with a specific ID
+export function readFromDb(dbName, objectStore, id) {
+    
+    return 0; // return whats at the ID as an object
+}
+
 //saves to a new object store
 export function storeToNewobjectStore(dbname, objectStoreName, data) {
     

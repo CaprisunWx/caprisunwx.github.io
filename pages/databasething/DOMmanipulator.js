@@ -48,6 +48,7 @@ function userSubmit() {
 
     //storing the data, probably can store it in one array/object probably, def object what am i saying
     let date = form.date.value;
+    console.log(date);
     let notes = form.textInput.value;
 
     //saving to local storage (TESTING PURPOSES)
