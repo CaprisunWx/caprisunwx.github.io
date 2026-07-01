@@ -61,15 +61,28 @@ export function storeToDB(dbName, objectStore, data) {
 
 // read from the database, with a specific ID
 export function readFromDb(dbName, objectStore, id) {
+    const request = indexedDB.open(dbName);
+    let db;
+    let data;
+
+    request.onerror = function(event) {
+        console.error("database hates you and doesnt wanna load :( " + event.target.error);
+    }
+
+    request.onsuccess = function(event) {
+        db = event.target.result;
+        const transaction = db.transaction([objectStore], 'read');
+    }
+
+
     
     return 0; // return whats at the ID as an object
 }
 
-//saves to a new object store
-export function storeToNewobjectStore(dbname, objectStoreName, data) {
-    
-}
+export function findLastID(dbName, objectStore) {
 
+    return 0; // return the last value
+}
 
 
 
